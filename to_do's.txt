@@ -1,0 +1,16 @@
+- add a procedure to calculate and store the number of valid calculations requested to the Google API services and store them in a POSTGRESQL table
+    - Record the valid transaction ammount in a row in a POSTGRESQL table
+    - Get the data from postgres and display it in a plotly chart
+
+- add a procedure to calculate de distances via openstreetmaps
+    - will need to add a sub procedure to geocode the adresses
+
+- add a container-menu to configure the distance calculations parameters sent to GMap or openstreetmaps
+    - API key for google maps
+    - time
+    - drive module
+    - etc
+
+- find a way to output the data in a compatible format. Last time it didn't work with the st.download module of streamlit
+
+- add a import "csv" feature 
