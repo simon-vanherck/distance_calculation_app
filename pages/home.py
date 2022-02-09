@@ -19,25 +19,22 @@ def app():
         column_names = list(data_source.columns.values)
         
         TOBE_destinations = []
-        TOBE_destinations = st.sidebar.multiselect("Select all TO BE destinations",column_names)
-        text_input = st.sidebar.selectbox('Select Employee ID column name',column_names)        
+        ORIGIN_column = []
+        ORIGIN_column = st.sidebar.selectbox('Select origin column name',column_names)      
+        TOBE_destinations = st.sidebar.multiselect("Select destination(s) column(s)",column_names)
 
-        estimated_cost = st.sidebar.write(
-            str('Estimated cost for distance calculation: '+
-            str(len(TOBE_destinations)*len(data_source.index)*0.005)+str(' €'))
-            )
+        engine = st.sidebar.radio(label="Engine Choice", options=("Google Maps","Open Street Map (free)"))  
+
+        if engine == "Google Maps":
+            estimated_cost = st.sidebar.write(
+                str('Estimated cost for distance calculation: '+
+                str(len(TOBE_destinations)*len(data_source.index)*0.005)+str(' €'))
+                )
+            
         submit_button = st.sidebar.button(label='Submit')
         
 
         if submit_button == True :
-            google_api_client.update_reports()
-
-            with st.spinner('Fetching employee data...'):
-                data_source = google_api_client.get_private_address(data_source,employee_id_column= text_input)
-                data_source = google_api_client.get_work_address(data_source,employee_id_column= text_input)
-                data_source.replace(np.nan,"", inplace = True)
-                data_source.dropna(axis=0, how="all" ,inplace= True)
-            st.success('Employee Data Fetched!')
 
             google_api_client.update_depature_time()
 
