@@ -7,7 +7,7 @@ data = os.getcwd()+"/data/tbl_calls.csv"
 df = pd.read_csv(data, delimiter=';')
 fig = px.line(df, x="date",y="calls", title="Historical record of calls")
 
-
+st.write("This is the dashboard page but doesn't do anything yet")
 
 with st.spinner("Loading Dashboard ..."):
     st.write()
